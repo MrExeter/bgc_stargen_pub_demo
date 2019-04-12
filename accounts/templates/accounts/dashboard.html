@@ -1,0 +1,34 @@
+{% extends 'accounts/accounts_base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block account_content %}
+
+    <div class="container col-md-8 col-md-offset-2">
+        <div class="jumbotron">
+            <h2>{{ user.get_full_name.title }}</h2>
+            <hr>
+            <table>
+                <tr>
+                    <td width="150px"><h4>Username : </h4></td>
+                    <td><h4> {{ user.username }}</h4></td>
+                </tr>
+                <tr>
+                    <td width="150px"><h4>Email : </h4></td>
+                    <td><h4>{{ user.email }}</h4></td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <a href="{% url 'accounts:edit' %}" class="btn btn-primary">
+                <span class="glyphicon glyphicon-pencil"></span>  Edit Profile
+            </a>
+
+            <a href="{% url 'accounts:password_change' %}" class="btn btn-danger">
+                <span class="glyphicon glyphicon-cog"></span> Change Password
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

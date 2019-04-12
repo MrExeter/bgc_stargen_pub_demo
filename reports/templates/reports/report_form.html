@@ -1,0 +1,73 @@
+{% extends 'reports/report_base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block report_content %}
+
+    <div class="container col-md-10 col-md-offset-1">
+
+        <div class="jumbotron">
+
+            <h2>Create Report</h2>
+            <br>
+            <br>
+
+
+            <h4>Employee Name :  </h4>
+            <h4 style="font-style: italic">{{user.first_name.capitalize }} {{ user.last_name.capitalize }}</h4>
+            <br>
+
+            <form action="{% url 'reports:report-add' %}" method="POST" id="reportCreateForm">
+
+                {% csrf_token %}
+
+                {{ form.media.css }}
+                {{ form.media.js }}
+
+                {{ form|crispy }}
+
+                <input type="submit" class="btn btn-primary btn-large" value="Create">
+                <a href="{% url 'reports:report-list' %}" class="btn btn-danger">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+    <!-- Include jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+
+    <script>
+        $(document).ready(function(){
+            var date_input=$('input[name="report_date"]'); //our date input has the name "date"
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+                format: 'dd MM yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true
+            })
+        })
+    </script>
+
+    <script>
+        $(function() {
+        $('.chosen-select').chosen();
+        $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
+      });
+    </script>
+
+{% endblock %}

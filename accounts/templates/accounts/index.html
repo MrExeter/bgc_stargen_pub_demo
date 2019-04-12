@@ -1,0 +1,74 @@
+{% extends 'accounts/accounts_base.html' %}
+{% load bootstrap4 %}
+{% load querystring from django_tables2 %}
+{#{% load title from django_tables2 %}#}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load trans blocktrans from i18n %}
+{% load render_table from django_tables2 %}
+
+    {% block account_content %}
+
+        {{ form.media.css }}
+        {{ form.media.js }}
+
+        <h2>Staff</h2>
+
+{##}
+{#        {% if table.page %}#}
+{#          <div class="table-container">#}
+{#        {% endif %}#}
+
+        <br>
+
+
+        <div class="container">
+
+            <div class="list-member">
+
+                <div class="list-group-item-text container-fluid">
+
+
+                    <table class="table  table-hover">
+
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>First</th>
+                                <th>Last</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+
+                        {% for user in all_users%}
+                            <tbody>
+                                <tr>
+                                    <td><a href="{% url 'accounts:detail' user.id %}">{{ user.pk }}</a></td>
+                                    <td>{{ user.first_name.lower.capitalize }}</td>
+                                    <td>{{ user.last_name.lower.capitalize }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                            </tbody>
+
+                        {% endfor %}
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    {% endblock %}
+
+
+        <!-- Include jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+

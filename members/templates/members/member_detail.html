@@ -1,0 +1,77 @@
+{% extends "members/member_base.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block member_content %}
+
+    <div class="container col-md-8 col-md-offset-2">
+        <div class="jumbotron">
+
+            <h2>Member</h2>
+            <hr>
+
+            <table>
+                <tr>
+                    <td width="200px"><h4>Member Number : </h4></td>
+                    <td><h4> {{ member.member_number }} </h4></td>
+                </tr>
+
+                <tr>
+                    <td width="200px"><h4>Name : </h4></td>
+                    <td><h4> {{ member.first_name.capitalize }} {{ member.last_name.capitalize }} </h4></td>
+                </tr>
+                <tr>
+                    <td><h4>Gender : </h4></td>
+                    <td><h4>{{ member.gender }}</h4></td>
+                </tr>
+
+                <tr>
+                    <td width="200px"><h4>Birthdate : </h4></td>
+                    <td><h4> {{ member.birth_date|date:'j F Y' }} </h4></td>
+                </tr>
+                <tr>
+                    <td><h4>Age : </h4></td>
+                    <td><h4>{{ member.get_age }}</h4></td>
+                </tr>
+            </table>
+
+            <hr>
+            <a href="{% url 'members:member-list' %}" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+
+{#            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">#}
+{#                <i class="fas fa-arrow-left"></i> Back#}
+{#            </a>#}
+
+
+
+            {% if request.user.userstaffprofile.has_admin_privilege %}
+                <a href="{% url 'members:member-update' member.pk %}" class="btn btn-success">
+                    <span class="fas fa-pencil-alt"></span>
+                    Update
+                </a>
+                <a href="{% url 'members:member-delete' member.pk %}" class="btn btn-danger">
+                    <span class="fas fa-trash-alt"></span>
+                    Delete
+                </a>
+            {% else %}
+                <button class="btn btn-info disabled" label="Edit" name="{% url 'members:member-update' member.pk %}">
+                    Update
+                </button>
+                <button class="btn btn-danger disabled" label="Delete"
+                        name="{% url 'members:member-delete' member.pk %}">Delete
+                </button>
+            {% endif %}
+
+            {#                {% if request.user.userstaffprofile.has_admin_privilege %}#}
+            {#                    <a href="{% url 'members:member-add' %}" class="btn btn-success">#}
+            {#                        Add Member#}
+            {#                    </a>#}
+            {#                {% endif %}#}
+
+        </div>
+    </div>
+
+
+{% endblock %}

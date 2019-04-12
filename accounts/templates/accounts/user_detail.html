@@ -1,0 +1,35 @@
+{% extends 'accounts/accounts_base.html' %}
+
+{% block title %}Staff Detail{% endblock %}
+
+{% block account_content %}
+
+    <div class="container col-md-8 col-md-offset-2">
+        <div class="jumbotron">
+            <h2>Staff member</h2>
+            <hr>
+
+            <table>
+                <tr>
+                    <td width="150px"><h4>Name : </h4></td>
+                    <td><h4> {{ user.get_full_name.title }}</h4></td>
+                </tr>
+                <tr>
+                    <td width="150px"><h4>Username : </h4></td>
+                    <td><h4> {{ user.username }}</h4></td>
+                </tr>
+                <tr>
+                    <td width="150px"><h4>Email : </h4></td>
+                    <td><h4>{{ user.email }}</h4></td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <a href="{% url 'accounts:user-list' %}">
+                <button class="btn btn-primary"    label="Back" name="{% url 'accounts:user-list' %}">Back</button>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

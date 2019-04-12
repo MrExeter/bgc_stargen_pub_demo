@@ -1,0 +1,31 @@
+{% extends 'accounts/accounts_base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Edit your account{% endblock %}
+
+{% block account_content %}
+
+    <div class="container col-md-8 col-md-offset-2">
+        <div class="jumbotron">
+
+            <h2>Edit your account</h2>
+            <p>You can edit your account using the following form:</p>
+
+            <form class="form-actions" action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <p>
+                    <input type="submit" class="btn btn-primary" value="Save Changes">
+                    <a href="{% url 'dashboard' %}" class="btn btn-danger">
+                        Cancel
+                    </a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

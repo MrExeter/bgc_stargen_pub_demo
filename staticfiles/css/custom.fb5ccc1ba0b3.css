@@ -1,0 +1,96 @@
+/* Jumbotron background for days of week */
+.jumbotron.report {
+    background-color: white;
+    border: 4px solid deepskyblue;
+    /*border-bottom-color: deepskyblue;*/
+    /*border-left-color: deepskyblue;*/
+    /*border-right-color: deepskyblue;*/
+    /*border-top-color: deepskyblue;*/
+    /*border-top-style: solid;*/
+    /*border-top-width: 4px;*/
+    /*border: 4px solid deepskyblue;*/
+}
+
+.jumbotron.monday {
+    background-color: yellow;
+}
+
+.jumbotron.tuesday {
+    background-color: pink;
+}
+
+.jumbotron.wednesday {
+    background-color: lightskyblue;
+}
+
+.jumbotron.thursday {
+    background-color: limegreen;
+}
+
+.jumbotron.friday {
+    background-color: orange;
+}
+
+/* Col background for days of week */
+.col-md-7.monday {
+    background-color: yellow;
+}
+
+.col-md-7.tuesday {
+    background-color: pink;
+}
+
+.col-md-7.wednesday {
+    background-color: lightskyblue;
+}
+
+.col-md-7.thursday {
+    background-color: limegreen;
+}
+
+.col-md-7.friday {
+    background-color: orange;
+}
+
+.col-md-7.saturday {
+    background-color: darkred;
+}
+
+.col-md-7.sunday {
+    background-color: darkred;
+}
+
+.table-striped  {
+   background-color: #e7e7e7;
+}
+
+img {
+    display: inline;
+}
+
+.admin-checklist {
+    border-collapse: separate; /* the default option */
+    border-spacing: 0; /* remove border gaps */
+    margin: 10px;
+    padding: 10px 10px 10px 10px;
+    border: solid black 2px;
+
+    /*border-right: solid black 2px;*/
+    width: 100%;
+
+}
+
+.admin-checklist td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.admin-checklist td:last-of-type
+{
+    border-right-width:2px;
+}
+
+.admin-checklist tr {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

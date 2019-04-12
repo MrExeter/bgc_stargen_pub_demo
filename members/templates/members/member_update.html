@@ -1,0 +1,52 @@
+{% extends "members/member_base.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+
+{% block member_content %}
+
+
+    <h4>Update member</h4>
+
+    <form action="{% url 'members:member-update' member.id %}" method="POST" id="memberUpdateForm">
+
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        <input type="submit" class="btn btn-primary btn-large" value="Update">
+        <a href="{% url 'members:detail' member.id %}" class="btn btn-danger">
+            Cancel
+        </a>
+{#        <input class="btn btn-danger" type="submit" name="cancel" value="cancel" onclick="history.go(-1)"/>#}
+
+
+    </form>
+
+    <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css"/>
+
+    <!-- Include jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <script>
+        $(document).ready(function () {
+            var date_input = $('input[name="birth_date"]'); //our date input has the name "date"
+            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+                format: 'dd MM yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true
+            })
+        })
+    </script>
+
+{% endblock %}

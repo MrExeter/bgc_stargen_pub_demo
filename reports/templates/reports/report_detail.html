@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+{% extends "reports/report_base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% block report_content %}
+
+    <link rel="stylesheet" href="{% static "css/custom.css" %}">
+
+        <div style="padding-bottom: 20px">
+            <a href="{% url 'reports:report-list' %}" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i>  Back
+            </a>
+{#            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">#}
+{#                <i class="fas fa-arrow-left"></i> Back#}
+{#            </a>#}
+
+            {% if report.report_user.id == request.user.id %}
+                <a href="{% url 'reports:report-update' report.pk %}" class="btn btn-info">
+                    <span class="fas fa-pencil-alt"></span>  Update
+                </a>
+            {% else %}
+
+                <button class="btn btn-info disabled"  label="Edit" name="{% url 'reports:report-update' report.pk %}">
+                    <span class="fas fa-pencil-alt"></span>  Update
+                </button>
+
+            {% endif %}
+            <a href="{% url 'reports:report-delete' report.pk %}" class="btn btn-danger">
+                <span class="fas fa-trash-alt"></span>  Delete
+            </a>
+
+
+{#            <a href="#" onclick="return xepOnline.Formatter.Format('report_page',#}
+{#                        {pageWidth:'216mm', pageHeight:'279mm', embedLocalImages : true, fostyle: 'Testing Normal', cssStyle:[{fontSize:'10px'},{fontWeight:'normal'}] });" class="btn btn-default disabled">#}
+{#                <i class="fi-print"></i>  Printer Friendly#}
+{#            </a>#}
+
+        </div>
+        <div class="container jumbotron report" id="border_report">
+            <div>
+                <div class="row" style="padding: 50px">
+
+                    <div class="col-md-4">
+
+                    </div>
+
+                        <div class="col-md-4">
+
+
+                                <img src="{{ STATIC_URL }}images/bgcp_logo.jpg"
+                                     width="150"
+                                     style="position: relative;
+                                     right: 50%;
+                                     left: 50%;
+                                     margin-left: -75px;
+                                     margin-top: -75px;"
+                                />
+
+                        </div>
+
+                    <div class="col-md-4"></div>
+
+                </div>
+
+                <div class="container" id="report_page">
+
+
+                    <div class="row" style="padding-bottom: 100px">
+                        <div class="col-md-4">
+
+                            <table class="admin-checklist">
+                                <tr>
+                                    <th style="text-align: center;" colspan="3"><strong>Adminstration Use Only</strong></th>
+{#                                    <td></td>#}
+{#                                    <td></td>#}
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="3"><strong>Reviewed by:</strong></td>
+{#                                    <td></td>#}
+{#                                    <td></td>#}
+                                </tr>
+
+
+                                {% if request.user.userstaffprofile.has_admin_privilege %}
+                                    {# Admin, unlock report detail checkoff boxes #}
+                                <tr>
+                                    <td><input type="checkbox"  title="Branch Director" disabled></td>
+                                    <td>Branch Director</td>
+                                    <td>__________</td>
+
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>Res. Dev. Director</td>
+                                    <td>__________</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>Executive Director</td>
+                                    <td>__________</td>
+                                </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="3"><strong>Entered in:</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>Staff Participation</td>
+                                    <td>__________</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>DAR Spreadsheet</td>
+                                    <td>__________</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>MTS</td>
+                                    <td>__________</td>
+                                </tr>
+
+                                {% else %}
+
+                                {# Not Admin, don't unlock report detail checkoff boxes #}
+                                <tr>
+                                    <td><input type="checkbox" title="Branch Director" disabled></td>
+                                    <td>Branch Director</td>
+                                    <td>__________</td>
+
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>Res. Dev. Director</td>
+                                    <td>__________</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>Executive Director</td>
+                                    <td>__________</td>
+                                </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="3"><strong>Entered in:</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>Staff Participation</td>
+                                    <td>__________</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>DAR Spreadsheet</td>
+                                    <td>__________</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" disabled></td>
+                                    <td>MTS</td>
+                                    <td>__________</td>
+                                </tr>
+
+
+                                {% endif %}
+
+                            </table>
+
+
+                        </div>
+
+                        <div class="col-md-4"><h2 style="text-align: center;">Staff Activity Report</h2></div>
+
+                        <div class="col-md-4"></div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Date</h4></div>
+                        <div class="col-md-3">
+                            <h4>{{ report.report_date|date:'j F Y'  }}</h4></div>
+                        <div class="col-md-7 {{ report.get_day_of_report.lower }}">
+                            <h3 style="text-align: center; padding: 20px">{{ report.get_day_of_report.upper }}</h3></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Employee</h4></div>
+                        <div class="col-md-10">
+                            <h4>{{ report.report_user.get_full_name.title }} </h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Site</h4></div>
+                        <div class="col-md-10">
+                            <h4>{{ report.site }}</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Department</h4></div>
+                        <div class="col-md-10">
+                            <h4>{{ report.department }}</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Category</h4></div>
+                        <div class="col-md-10">
+                            <h4>{{ report.program }}</h4></div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Demographics</h4></div>
+                        <div class="col-md-6">
+
+                            {% if report.members.all %}
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center">Age Range</th>
+                                                <th style="text-align: center">Total</th>
+                                                <th style="text-align: center">Girls</th>
+                                                <th style="text-align: center">Boys</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: center">6 - 9</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.TOTALYOUNG }}</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.G69 }}</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.B69 }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">10 - 12</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.TOTALTWEEN }}</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.GTWEEN}}</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.BTWEEN}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">Teens</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.TOTALTEEN }}</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.GTEEN}}</td>
+                                                <td style="text-align: center">{{ report.get_age_and_gender_buckets.BTEEN}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            {% else %}
+                                <p>-- none --</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Summary</h4></div>
+                        <div class="col-md-8">
+                            {% if report.summary %}
+                                <p>{{ report.summary }}</p>
+                            {% else %}
+                                <p>-- none --</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Feedback</h4></div>
+                        <div class="col-md-8">
+                            {% if report.feedback_challenges %}
+                                <p>{{ report.feedback_challenges }}</p>
+                            {% else %}
+                                <p>-- none --</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Members</h4></div>
+                        <div class="col-md-8">
+
+                            {% if report.members.all %}
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Number</th>
+                                                <th>Name</th>
+                                                <th style="text-align: center">Age</th>
+                                                <th style="text-align: center">Gender</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for member in report.members.all %}
+                                                <tr>
+                                                    <td>{{ member.member_number }}</td>
+                                                    <td>{{ member.first_name.capitalize }} {{ member.last_name.capitalize }}</td>
+                                                    <td style="text-align: center">{{ member.get_age }}</td>
+                                                    <td style="text-align: center">{{ member.gender }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p>-- none --</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+{#        <script src="/static/bgc_dj_stargen_adv/js/xepOnline.jqPlugin.js"></script>#}
+
+{#        </div>#}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "accounts/accounts_base.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block account_content %}
+
+    <div class="container col-md-8 col-md-offset-2">
+        <div class="jumbotron">
+
+            <h2>Sign Up</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+{#                {% bootstrap_form form %}#}
+                <input type="submit" class="btn btn-primary" value="Sign Up">
+                <a href="{% url 'accounts:login' %}" class="btn btn-danger">
+                        Cancel
+                    </a>
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %}
